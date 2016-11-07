@@ -21,7 +21,7 @@
       <dd><%= @director.oscar %></dd>
 
       <dt>Image</dt>
-      <dd><img src="//<%= @director.image %>" class="img-responsive"></dd>
+      <dd><img src="<%= @director.image %>" class="img-responsive"></dd>
 
       <dt>Address</dt>
       <dd>
@@ -60,15 +60,17 @@
           <a href="/movies/<%= movie.id %>">
             <%= movie.title %>
           </a>
-          <a href="/movies/<%= movie.id %>" class="btn btn-primary">
-            Show
-          </a>
-          <a href="/movies/<%= movie.id %>/edit" class="btn btn-warning">
-            Edit
-          </a>
-          <a href="/delete_movie/<%= movie.id %>" class="btn btn-danger" rel="nofollow">
-            Delete
-          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/movies/<%= movie.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/movies/<%= movie.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_movie/<%= movie.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
         </li>
       <% end %>
 
