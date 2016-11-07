@@ -3,28 +3,53 @@
     Movies
     <a href="/movies/new" class="btn btn-lg btn-success">New Movie</a>
   </h1>
-</div>
-<%= search_form_for @q do |f| %>
-  <p class="lead">Narrow results:</p>
+</div><div class="row mb-1">
+  <div class="col-md-12">
+    <%= search_form_for @q, :class => "collapse", :id => "movies_filters" do |f| %>
+      <p class="lead">Narrow results:</p>
 
-  <div class="form-group">
-    <%= f.label :title_cont, "Title containing" %>
-    <%= f.text_field :title_cont, :class => "form-control", :placeholder => "Title containing" %>
-  </div>
+        <div class="form-group">
+      <%= f.label :created_at_lteq, "Created at less than or equal to" %>
+      <div class='input-group date' id='created_atlteqPicker'>
+        <%= f.text_field :created_at_lteq, :class => "form-control", :placeholder => "Created at less than or equal to" %>
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+        <script type="text/javascript">
+          $(function () {
+              $('#created_atlteqPicker').datetimepicker({
+                format: 'YYYY-MM-DD HH:MM:SS'
+              });
+          });
+        </script>
+      </div>
+    </div>
 
 <div class="form-group">
-    <%= f.label :duration_lt, "Duration less than" %>
-    <%= f.text_field :duration_lt, :class => "form-control", :placeholder => "Duration less than" %>
+      <%= f.label :created_at_gteq, "Created at greater than or equal to" %>
+      <div class='input-group date' id='created_atgteqPicker'>
+        <%= f.text_field :created_at_gteq, :class => "form-control", :placeholder => "Created at greater than or equal to" %>
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+        <script type="text/javascript">
+          $(function () {
+              $('#created_atgteqPicker').datetimepicker({
+                format: 'YYYY-MM-DD HH:MM:SS'
+              });
+          });
+        </script>
+      </div>
+    </div>
+
+<div class="form-group">
+    <%= f.label :title_cont, "Title contains" %>
+    <%= f.text_field :title_cont, :class => "form-control", :placeholder => "Title contains" %>
   </div>
 
 <div class="form-group">
     <%= f.label :duration_lteq, "Duration less than or equal to" %>
     <%= f.text_field :duration_lteq, :class => "form-control", :placeholder => "Duration less than or equal to" %>
-  </div>
-
-<div class="form-group">
-    <%= f.label :duration_gt, "Duration greater than" %>
-    <%= f.text_field :duration_gt, :class => "form-control", :placeholder => "Duration greater than" %>
   </div>
 
 <div class="form-group">
@@ -53,21 +78,24 @@
   </div>
 
 <div class="form-group">
-    <%= f.label :description_cont, "Description containing" %>
-    <%= f.text_field :description_cont, :class => "form-control", :placeholder => "Description containing" %>
+    <%= f.label :description_cont, "Description contains" %>
+    <%= f.text_field :description_cont, :class => "form-control", :placeholder => "Description contains" %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :director_name_cont, "Director name containing" %>
-    <%= f.text_field :director_name_cont, :class => "form-control", :placeholder => "Director name containing" %>
+        <div class="form-group">
+      <%= f.label :director_name_cont, "Director name contains" %>
+      <%= f.text_field :director_name_cont, :class => "form-control", :placeholder => "Director name contains" %>
+    </div>
+
+      <%= f.submit :class => "btn btn-primary btn-block" %>
+
+      <a href="/movies" class="btn btn-default btn-block">Clear filters</a>
+    <% end %>
+    <a class="btn btn-default btn-block mb-1" data-toggle="collapse" href="#movies_filters">
+      Show Filters
+    </a>
   </div>
-
-  <%= f.submit :class => "btn btn-primary btn-block" %>
-
-  <a href="/movies" class="btn btn-default btn-block">Clear filters</a>
-<% end %>
-
-
+</div>
 
 <div class="row">
   <div class="col-md-12">
