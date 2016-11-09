@@ -3,28 +3,28 @@
     Directors
     <a href="/directors/new" class="btn btn-lg btn-success">New Director</a>
   </h1>
-</div>
-<%= search_form_for @q do |f| %>
-  <p class="lead">Narrow results:</p>
+</div><div class="row mb-1">
+  <div class="col-md-12">
+    <%= search_form_for @q, :class => "collapse", :id => "directors_filters" do |f| %>
+      <p class="lead">Narrow results:</p>
 
-  <div class="form-group">
-    <%= f.label :name_cont, "Name containing" %>
-    <%= f.text_field :name_cont, :class => "form-control", :placeholder => "Name containing" %>
+        <div class="form-group">
+    <%= f.label :name_cont, "Name contains" %>
+    <%= f.text_field :name_cont, :class => "form-control", :placeholder => "Name contains" %>
   </div>
 
 <div class="form-group">
-    <%= f.label :age_lt, "Age less than" %>
-    <%= f.text_field :age_lt, :class => "form-control", :placeholder => "Age less than" %>
+    <%= f.label :oscar_eq, "Oscar" %>
+    <div>
+      <%= f.radio_button :oscar_eq, "1", checked: ((params[:q] && params[:q][:oscar_eq]) == "1" ? "checked" : "") %> Yes
+      <%= f.radio_button :oscar_eq, "0", checked: ((params[:q] && params[:q][:oscar_eq]) == "0" ? "checked" : "")%> No
+      <%= f.radio_button :oscar_eq, ""%> Either
+    </div>
   </div>
 
 <div class="form-group">
-    <%= f.label :age_lteq, "Age less than or equal to" %>
-    <%= f.text_field :age_lteq, :class => "form-control", :placeholder => "Age less than or equal to" %>
-  </div>
-
-<div class="form-group">
-    <%= f.label :age_gt, "Age greater than" %>
-    <%= f.text_field :age_gt, :class => "form-control", :placeholder => "Age greater than" %>
+    <%= f.label :bio_cont, "Bio contains" %>
+    <%= f.text_field :bio_cont, :class => "form-control", :placeholder => "Bio contains" %>
   </div>
 
 <div class="form-group">
@@ -33,26 +33,92 @@
   </div>
 
 <div class="form-group">
-    <%= f.label :bio_cont, "Bio containing" %>
-    <%= f.text_field :bio_cont, :class => "form-control", :placeholder => "Bio containing" %>
+    <%= f.label :age_lteq, "Age less than or equal to" %>
+    <%= f.text_field :age_lteq, :class => "form-control", :placeholder => "Age less than or equal to" %>
   </div>
 
 <div class="form-group">
-    <%= f.label :oscar_true, "Oscar is" %>
-    <%= f.text_field :oscar_true, :class => "form-control", :placeholder => "Oscar is" %>
+      <%= f.label :dob_gteq, "Dob greater than or equal to" %>
+      <div class='input-group date' id='dobgteqPicker'>
+        <%= f.text_field :dob_gteq, :class => "form-control", :placeholder => "Dob greater than or equal to" %>
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+        <script type="text/javascript">
+          $(function () {
+              $('#dobgteqPicker').datetimepicker({
+                format: 'YYYY-MM-DD HH:MM:SS'
+              });
+          });
+        </script>
+      </div>
+    </div>
+
+<div class="form-group">
+      <%= f.label :dob_lteq, "Dob less than or equal to" %>
+      <div class='input-group date' id='doblteqPicker'>
+        <%= f.text_field :dob_lteq, :class => "form-control", :placeholder => "Dob less than or equal to" %>
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+        <script type="text/javascript">
+          $(function () {
+              $('#doblteqPicker').datetimepicker({
+                format: 'YYYY-MM-DD HH:MM:SS'
+              });
+          });
+        </script>
+      </div>
+    </div>
+
+<div class="form-group">
+      <%= f.label :created_at_gteq, "Created at greater than or equal to" %>
+      <div class='input-group date' id='created_atgteqPicker'>
+        <%= f.text_field :created_at_gteq, :class => "form-control", :placeholder => "Created at greater than or equal to" %>
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+        <script type="text/javascript">
+          $(function () {
+              $('#created_atgteqPicker').datetimepicker({
+                format: 'YYYY-MM-DD HH:MM:SS'
+              });
+          });
+        </script>
+      </div>
+    </div>
+
+<div class="form-group">
+      <%= f.label :created_at_lteq, "Created at less than or equal to" %>
+      <div class='input-group date' id='created_atlteqPicker'>
+        <%= f.text_field :created_at_lteq, :class => "form-control", :placeholder => "Created at less than or equal to" %>
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+        <script type="text/javascript">
+          $(function () {
+              $('#created_atlteqPicker').datetimepicker({
+                format: 'YYYY-MM-DD HH:MM:SS'
+              });
+          });
+        </script>
+      </div>
+    </div>
+
+        <div class="form-group">
+      <%= f.label :movies_title_cont, "Movie title contains" %>
+      <%= f.text_field :movies_title_cont, :class => "form-control", :placeholder => "Movie title contains" %>
+    </div>
+
+      <%= f.submit :class => "btn btn-primary btn-block" %>
+
+      <a href="/directors" class="btn btn-default btn-block">Clear filters</a>
+    <% end %>
+    <a class="btn btn-default btn-block mb-1" data-toggle="collapse" href="#directors_filters">
+      Show Filters
+    </a>
   </div>
-
-  <div class="form-group">
-    <%= f.label :movies_title_cont, "Movie title containing" %>
-    <%= f.text_field :movies_title_cont, :class => "form-control", :placeholder => "Movie title containing" %>
-  </div>
-
-  <%= f.submit :class => "btn btn-primary btn-block" %>
-
-  <a href="/directors" class="btn btn-default btn-block">Clear filters</a>
-<% end %>
-
-
+</div>
 
 <div class="row">
   <div class="col-md-12">
@@ -75,7 +141,7 @@
         <td><%= director.age %></td>
         <td><%= director.bio %></td>
         <td><%= director.oscar %></td>
-        <td><img src='//<%= director.image %>' class='img-responsive'></td>
+        <td><img src='<%= director.image %>' class='img-responsive'></td>
         <td><%= director.address %></td>
         <td>
           <a href="/directors/<%= director.id %>" class="btn btn-primary">Show</a>
