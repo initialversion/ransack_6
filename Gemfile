@@ -47,8 +47,8 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'font-awesome-sass', '~> 4.5.0'
 gem 'starter_generators', :git => 'https://github.com/raghubetina/starter_generators.git'
+gem 'font-awesome-sass', '~> 4.5.0'
 gem 'activeadmin', '~> 1.0.0.pre4'
 gem 'inherited_resources', :git => 'https://github.com/activeadmin/inherited_resources.git'
 gem 'carrierwave'
@@ -62,3 +62,5 @@ gem "bootstrap4-kaminari-views"
 gem 'seed_dump', :git => 'https://github.com/murugan-r/seed_dump.git'
 gem 'activerecord-import'
 gem "ransack"
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
