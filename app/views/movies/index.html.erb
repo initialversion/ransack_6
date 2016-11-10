@@ -19,23 +19,13 @@
   </div>
 
 <div class="form-group">
-    <%= f.label :rating_gt, "Rating " %>
-    <%= f.text_field :rating_gt, :class => "form-control", :placeholder => "Rating " %>
+    <%= f.label :rating_gteq, "Rating greater than or equal to" %>
+    <%= f.text_field :rating_gteq, :class => "form-control", :placeholder => "Rating greater than or equal to" %>
   </div>
 
 <div class="form-group">
-    <%= f.label :rating_gteq, "Rating " %>
-    <%= f.text_field :rating_gteq, :class => "form-control", :placeholder => "Rating " %>
-  </div>
-
-<div class="form-group">
-    <%= f.label :rating_lt, "Rating " %>
-    <%= f.text_field :rating_lt, :class => "form-control", :placeholder => "Rating " %>
-  </div>
-
-<div class="form-group">
-    <%= f.label :rating_lteq, "Rating " %>
-    <%= f.text_field :rating_lteq, :class => "form-control", :placeholder => "Rating " %>
+    <%= f.label :rating_lteq, "Rating less than or equal to" %>
+    <%= f.text_field :rating_lteq, :class => "form-control", :placeholder => "Rating less than or equal to" %>
   </div>
 
 <div class="form-group">
@@ -49,38 +39,46 @@
   </div>
 
 <div class="form-group">
-      <%= f.label :created_at_gteq, "Created at greater than or equal to" %>
-      <div class='input-group date' id='created_atgteqPicker'>
-        <%= f.text_field :created_at_gteq, :class => "form-control", :placeholder => "Created at greater than or equal to" %>
-        <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-        <script type="text/javascript">
+      <%= f.label :created_at, "Created at" %>
+    </div>
+      <div class="form-group">
+          <div class="row">
+            <div class='col-md-6'>
+              <div class='input-group date' id='created_atgteqPicker'>
+                  <%= f.text_field :created_at_gteq, :class => "form-control", :placeholder => "Created at greater than or equal to" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+            </div>
+
+            <div class='col-md-6'>
+              <div class='input-group date' id='created_atlteqPicker'>
+                  <%= f.text_field :created_at_lteq, :class => "form-control", :placeholder => "Created at less than or equal to" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+            </div>
+          </div>
+      </div>
+      <script type="text/javascript">
           $(function () {
               $('#created_atgteqPicker').datetimepicker({
-                format: 'YYYY-MM-DD HH:MM:SS'
+                  format: 'YYYY-MM-DD hh:mm:ss'
               });
-          });
-        </script>
-      </div>
-    </div>
-
-<div class="form-group">
-      <%= f.label :created_at_lteq, "Created at less than or equal to" %>
-      <div class='input-group date' id='created_atlteqPicker'>
-        <%= f.text_field :created_at_lteq, :class => "form-control", :placeholder => "Created at less than or equal to" %>
-        <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-        <script type="text/javascript">
-          $(function () {
               $('#created_atlteqPicker').datetimepicker({
-                format: 'YYYY-MM-DD HH:MM:SS'
+                  useCurrent: false,
+                  format: 'YYYY-MM-DD hh:mm:ss'
+              });
+              $('#created_atgteqPicker').on("dp.change", function (e) {
+                  $('#created_atlteqPicker').data("DateTimePicker").minDate(e.date);
+              });
+              $('#created_atlteqPicker').on("dp.change", function (e) {
+                  $('#created_atgteqPicker').data("DateTimePicker").maxDate(e.date);
               });
           });
-        </script>
-      </div>
-    </div>
+      </script>
 
         <div class="form-group">
       <%= f.label :director_name_cont, "Director name contains" %>
@@ -115,7 +113,13 @@
         <td><%= movie.duration %></td>
         <td><%= movie.rating %></td>
         <td><%= movie.description %></td>
-        <td><%= movie.director.name %></td>
+        <td>
+          <% if movie.director.present? %>
+            <a href="/directors/<%= movie.director.id %>">
+              <%= movie.director.name %>
+            </a>
+          <% end %>
+        </td>
         <td>
           <a href="/movies/<%= movie.id %>" class="btn btn-primary">Show</a>
           <a href="/movies/<%= movie.id %>/edit" class="btn btn-warning">Edit</a>
