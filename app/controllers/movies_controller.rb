@@ -1,12 +1,13 @@
 class MoviesController < ApplicationController
   def index
     @q = Movie.ransack(params[:q])
-    @movies = @q.result(:distinct => true).includes(:director).page(params[:page]).per(10)
+    @movies = @q.result(:distinct => true).includes(:director, :castings, :cast).page(params[:page]).per(10)
 
     render("movies/index.html.erb")
   end
 
   def show
+    @casting = Casting.new
     @movie = Movie.find(params[:id])
 
     render("movies/show.html.erb")
@@ -26,6 +27,9 @@ class MoviesController < ApplicationController
     @movie.rating = params[:rating]
     @movie.description = params[:description]
     @movie.director_id = params[:director_id]
+    @movie.showtime = params[:showtime]
+    @movie.released_on = params[:released_on]
+    @movie.best_picture = params[:best_picture]
 
     save_status = @movie.save
 
@@ -50,6 +54,9 @@ class MoviesController < ApplicationController
     @movie.rating = params[:rating]
     @movie.description = params[:description]
     @movie.director_id = params[:director_id]
+    @movie.showtime = params[:showtime]
+    @movie.released_on = params[:released_on]
+    @movie.best_picture = params[:best_picture]
 
     save_status = @movie.save
 

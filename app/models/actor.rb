@@ -1,16 +1,14 @@
-class Movie < ApplicationRecord
+class Actor < ApplicationRecord
   # Direct associations
 
   has_many   :castings,
              :dependent => :destroy
 
-  belongs_to :director
-
   # Indirect associations
 
-  has_many   :cast,
+  has_many   :filmography,
              :through => :castings,
-             :source => :actor
+             :source => :movie
 
   # Validations
 

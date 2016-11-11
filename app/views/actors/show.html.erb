@@ -1,57 +1,33 @@
 <div class="page-header">
-  <h3>Movie #<%= @movie.id %></h3>
+  <h3>Actor #<%= @actor.id %></h3>
 </div>
 
 <div class="row">
   <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
-      <dt>Title</dt>
-      <dd><%= @movie.title %></dd>
+      <dt>Name</dt>
+      <dd><%= @actor.name %></dd>
 
-      <dt>Duration</dt>
-      <dd><%= @movie.duration %></dd>
-
-      <dt>Rating</dt>
-      <dd><%= @movie.rating %></dd>
-
-      <dt>Description</dt>
-      <dd><%= @movie.description %></dd>
-
-      <dt>Director</dt>
-      <dd>
-        <% if @movie.director.present? %>
-          <a href="/directors/<%= @movie.director_id %>">
-            <%= @movie.director.name %>
-          </a>
-        <% end %>
-      </dd>
-
-      <dt>Showtime</dt>
-      <dd><%= @movie.showtime %></dd>
-
-      <dt>Released on</dt>
-      <dd><%= @movie.released_on %></dd>
-
-      <dt>Best picture</dt>
-      <dd><%= @movie.best_picture %></dd>
+      <dt>Dob</dt>
+      <dd><%= @actor.dob %></dd>
 
     </dl>
 
     <div class="btn-group btn-group-justified">
-      <a href="/movies" class="btn btn-primary">
+      <a href="/actors" class="btn btn-primary">
         Back
       </a>
-      <a href="/movies/<%= @movie.id %>/edit" class="btn btn-warning">
+      <a href="/actors/<%= @actor.id %>/edit" class="btn btn-warning">
         Edit
       </a>
-      <a href="/delete_movie/<%= @movie.id %>" class="btn btn-danger" rel="nofollow">
+      <a href="/delete_actor/<%= @actor.id %>" class="btn btn-danger" rel="nofollow">
         Delete
       </a>
     </div>
   </div>
 </div>
 
-<!-- A Movie has many castings -->
+<!-- A Actor has many castings -->
 
 <div class="row">
   <div class="col-md-12">
@@ -60,7 +36,7 @@
         Castings
       </li>
 
-      <% @movie.castings.each do |casting| %>
+      <% @actor.castings.each do |casting| %>
         <li class="list-group-item">
           <a href="/castings/<%= casting.id %>">
             <%= casting.movie_id %>
@@ -85,16 +61,16 @@
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
       <!-- Label and input for movie_id -->
-      <input type="hidden" name="movie_id" value="<%= @movie.id %>">
-
-      <!-- Label and input for actor_id -->
       <div class="form-group">
-        <label for="actor_id" class="control-label">
-          Actor
+        <label for="movie_id" class="control-label">
+          Movie
         </label>
 
-        <%= select_tag(:actor_id, options_from_collection_for_select(Actor.all, :id, :name), :class => "form-control") %>
+        <%= select_tag(:movie_id, options_from_collection_for_select(Movie.all, :id, :title), :class => "form-control") %>
       </div>
+
+      <!-- Label and input for actor_id -->
+      <input type="hidden" name="actor_id" value="<%= @actor.id %>">
 
       <button class="btn btn-block btn-success">
         Create Casting
@@ -105,28 +81,28 @@
   </div>
 </div>
 
-<!-- A Movie has many cast -->
+<!-- A Actor has many filmography -->
 
 <div class="row">
   <div class="col-md-12">
     <ul class="list-group">
       <li class="list-group-item list-group-item-info">
-        Cast
+        Filmography
       </li>
 
-      <% @movie.cast.each do |actor| %>
+      <% @actor.filmography.each do |movie| %>
         <li class="list-group-item">
-          <a href="/actors/<%= actor.id %>">
-            <%= actor.name %>
+          <a href="/movies/<%= movie.id %>">
+            <%= movie.title %>
           </a>
           <div class="btn-group btn-group-xs pull-right">
-            <a href="/actors/<%= actor.id %>" class="btn btn-primary">
+            <a href="/movies/<%= movie.id %>" class="btn btn-primary">
               <i class="fa fa-search-plus"></i>
             </a>
-            <a href="/actors/<%= actor.id %>/edit" class="btn btn-warning">
+            <a href="/movies/<%= movie.id %>/edit" class="btn btn-warning">
               <i class="fa fa-edit"></i>
             </a>
-            <a href="/delete_actor/<%= actor.id %>" class="btn btn-danger" rel="nofollow">
+            <a href="/delete_movie/<%= movie.id %>" class="btn btn-danger" rel="nofollow">
               <i class="fa fa-trash-o"></i>
             </a>
           </div>
