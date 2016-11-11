@@ -63,6 +63,32 @@
         <%= select_tag(:director_id, options_from_collection_for_select(Director.all, :id, :name, @movie.director_id), :class => "form-control") %>
       </div>
 
+      <!-- Label and input for showtime -->
+      <div class="form-group">
+        <label for="showtime" class="control-label">
+          Showtime
+        </label>
+
+        <input type="text" id="showtime" name="showtime" placeholder="Showtime" class="form-control" value="<%= @movie.showtime %>">
+      </div>
+
+      <!-- Label and input for released_on -->
+      <div class="form-group">
+        <label for="released_on" class="control-label">
+          Released on
+        </label>
+
+        <input type="text" id="released_on" name="released_on" placeholder="Released on" class="form-control" value="<%= @movie.released_on %>">
+      </div>
+
+      <!-- Label and input for best_picture -->
+      <div class="checkbox">
+        <label for="best_picture">
+          <input type="checkbox" id="best_picture" name="best_picture" value="1" <%= "checked" if @movie.best_picture %>>
+          Best picture
+        </label>
+      </div>
+
       <button class="btn btn-success">
         Create Movie
       </button>

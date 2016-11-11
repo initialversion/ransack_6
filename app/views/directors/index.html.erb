@@ -3,6 +3,128 @@
     Directors
     <a href="/directors/new" class="btn btn-lg btn-success">New Director</a>
   </h1>
+</div><div class="row mb-1">
+  <div class="col-md-12">
+    <%= search_form_for @q, :class => "collapse", :id => "directors_filters" do |f| %>
+      <p class="lead">Narrow results:</p>
+
+        <div class="form-group">
+    <%= f.label :name_cont, "Name contains" %>
+    <%= f.text_field :name_cont, :class => "form-control", :placeholder => "Name contains" %>
+  </div>
+
+<div class="form-group">
+    <%= f.label :bio_cont, "Bio contains" %>
+    <%= f.text_field :bio_cont, :class => "form-control", :placeholder => "Bio contains" %>
+  </div>
+
+<div class="form-group">
+    <%= f.label :age_gteq, "Age greater than or equal to" %>
+    <%= f.text_field :age_gteq, :class => "form-control", :placeholder => "Age greater than or equal to" %>
+  </div>
+
+<div class="form-group">
+    <%= f.label :age_lteq, "Age less than or equal to" %>
+    <%= f.text_field :age_lteq, :class => "form-control", :placeholder => "Age less than or equal to" %>
+  </div>
+
+<div class="form-group">
+      <%= f.label :dob, "Dob" %>
+    </div>
+      <div class="form-group">
+          <div class="row">
+            <div class='col-md-6 mb-1'>
+              <div class='input-group date' id='dobgteqPicker'>
+                  <%= f.text_field :dob_gteq, :class => "form-control", :placeholder => "Dob greater than or equal to" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+            </div>
+
+            <div class='col-md-6'>
+              <div class='input-group date' id='doblteqPicker'>
+                  <%= f.text_field :dob_lteq, :class => "form-control", :placeholder => "Dob less than or equal to" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+            </div>
+          </div>
+      </div>
+      <script type="text/javascript">
+          $(function () {
+              $('#dobgteqPicker').datetimepicker({
+                  format: 'MM/DD/YYYY'
+              });
+              $('#doblteqPicker').datetimepicker({
+                  useCurrent: false,
+                  format: 'MM/DD/YYYY'
+              });
+              $('#dobgteqPicker').on("dp.change", function (e) {
+                  $('#doblteqPicker').data("DateTimePicker").minDate(e.date);
+              });
+              $('#doblteqPicker').on("dp.change", function (e) {
+                  $('#dobgteqPicker').data("DateTimePicker").maxDate(e.date);
+              });
+          });
+      </script>
+
+<div class="form-group">
+      <%= f.label :created_at, "Created at" %>
+    </div>
+      <div class="form-group">
+          <div class="row">
+            <div class='col-md-6 mb-1'>
+              <div class='input-group date' id='created_atgteqPicker'>
+                  <%= f.text_field :created_at_gteq, :class => "form-control", :placeholder => "Created at greater than or equal to" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+            </div>
+
+            <div class='col-md-6'>
+              <div class='input-group date' id='created_atlteqPicker'>
+                  <%= f.text_field :created_at_lteq, :class => "form-control", :placeholder => "Created at less than or equal to" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+            </div>
+          </div>
+      </div>
+      <script type="text/javascript">
+          $(function () {
+              $('#created_atgteqPicker').datetimepicker({
+                  format: 'YYYY-MM-DD hh:mm:SS'
+              });
+              $('#created_atlteqPicker').datetimepicker({
+                  useCurrent: false,
+                  format: 'YYYY-MM-DD hh:mm:SS'
+              });
+              $('#created_atgteqPicker').on("dp.change", function (e) {
+                  $('#created_atlteqPicker').data("DateTimePicker").minDate(e.date);
+              });
+              $('#created_atlteqPicker').on("dp.change", function (e) {
+                  $('#created_atgteqPicker').data("DateTimePicker").maxDate(e.date);
+              });
+          });
+      </script>
+
+        <div class="form-group">
+      <%= f.label :movies_title_cont, "Movie title contains" %>
+      <%= f.text_field :movies_title_cont, :class => "form-control", :placeholder => "Movie title contains" %>
+    </div>
+
+      <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
+
+      <a href="/directors" class="btn btn-default btn-block mb-1">Clear filters</a>
+    <% end %>
+    <a class="btn btn-default btn-block mb-1" data-toggle="collapse" href="#directors_filters">
+      Show Filters
+    </a>
+  </div>
 </div>
 
 
@@ -22,10 +144,8 @@
         <th>Dob</th>
         <th>Age</th>
         <th>Bio</th>
-        <th>Oscar</th>
         <th>Image</th>
         <th>Address</th>
-        <th>Email</th>
         <th>Actions</th>
       </tr>
 
@@ -35,12 +155,12 @@
         <td><%= director.dob %></td>
         <td><%= director.age %></td>
         <td><%= director.bio %></td>
-        <td><%= director.oscar %></td>
         <td><img src='<%= director.image %>' class='img-responsive'></td>
         <td><%= director.address %></td>
-        <td><%= director.email %></td>
         <td>
           <a href="/directors/<%= director.id %>" class="btn btn-primary">Show</a>
+          <a href="/directors/<%= director.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_director/<%= director.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
         </td>
       </tr>
       <% end %>

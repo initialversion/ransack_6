@@ -17,9 +17,6 @@
       <dt>Bio</dt>
       <dd><%= @director.bio %></dd>
 
-      <dt>Oscar</dt>
-      <dd><%= @director.oscar %></dd>
-
       <dt>Image</dt>
       <dd><img src="<%= @director.image %>" class="img-responsive"></dd>
 
@@ -30,14 +27,17 @@
         </div>
       </dd>
 
-      <dt>Email</dt>
-      <dd><%= @director.email %></dd>
-
     </dl>
 
     <div class="btn-group btn-group-justified">
       <a href="/directors" class="btn btn-primary">
         Back
+      </a>
+      <a href="/directors/<%= @director.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_director/<%= @director.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
       </a>
     </div>
   </div>
@@ -70,6 +70,82 @@
           </div>
         </li>
       <% end %>
+
+      <li class="list-group-item">
+        <form action="/create_movie" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for title -->
+      <div class="form-group">
+        <label for="title" class="control-label">
+          Title
+        </label>
+
+        <input type="text" id="title" name="title" placeholder="Title" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for duration -->
+      <div class="form-group">
+        <label for="duration" class="control-label">
+          Duration
+        </label>
+
+        <input type="text" id="duration" name="duration" placeholder="Duration" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for rating -->
+      <div class="form-group">
+        <label for="rating" class="control-label">
+          Rating
+        </label>
+
+        <input type="text" id="rating" name="rating" placeholder="Rating" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for description -->
+      <div class="form-group">
+        <label for="description" class="control-label">
+          Description
+        </label>
+
+        <textarea id="description" name="description" placeholder="Description" class="form-control" rows="3"></textarea>
+      </div>
+
+      <!-- Label and input for director_id -->
+      <input type="hidden" name="director_id" value="<%= @director.id %>">
+
+      <!-- Label and input for showtime -->
+      <div class="form-group">
+        <label for="showtime" class="control-label">
+          Showtime
+        </label>
+
+        <input type="text" id="showtime" name="showtime" placeholder="Showtime" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for released_on -->
+      <div class="form-group">
+        <label for="released_on" class="control-label">
+          Released on
+        </label>
+
+        <input type="text" id="released_on" name="released_on" placeholder="Released on" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for best_picture -->
+      <div class="checkbox">
+        <label for="best_picture">
+          <input type="checkbox" id="best_picture" name="best_picture" value="1" <%= "checked" if @movie.best_picture %>>
+          Best picture
+        </label>
+      </div>
+
+      <button class="btn btn-block btn-success">
+        Create Movie
+      </button>
+    </form>
+      </li>
     </ul>
   </div>
 </div>

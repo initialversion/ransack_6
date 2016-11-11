@@ -14,6 +14,91 @@
   </div>
 
 <div class="form-group">
+    <%= f.label :best_picture_eq, "Best picture" %>
+    <div>
+      <%= f.radio_button :best_picture_eq, "1", checked: ((params[:q] && params[:q][:best_picture_eq]) == "1" ? "checked" : "") %> Yes
+      <%= f.radio_button :best_picture_eq, "0", checked: ((params[:q] && params[:q][:best_picture_eq]) == "0" ? "checked" : "")%> No
+      <%= f.radio_button :best_picture_eq, ""%> Either
+    </div>
+  </div>
+
+<div class="form-group">
+      <%= f.label :released_on, "Released on" %>
+    </div>
+      <div class="form-group">
+          <div class="row">
+            <div class='col-md-6 mb-1'>
+              <div class='input-group date' id='released_ongteqPicker'>
+                  <%= f.text_field :released_on_gteq, :class => "form-control", :placeholder => "Released on greater than or equal to" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+            </div>
+
+            <div class='col-md-6'>
+              <div class='input-group date' id='released_onlteqPicker'>
+                  <%= f.text_field :released_on_lteq, :class => "form-control", :placeholder => "Released on less than or equal to" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+            </div>
+          </div>
+      </div>
+      <script type="text/javascript">
+          $(function () {
+              $('#released_ongteqPicker').datetimepicker({
+                  format: 'MM/DD/YYYY'
+              });
+              $('#released_onlteqPicker').datetimepicker({
+                  useCurrent: false,
+                  format: 'MM/DD/YYYY'
+              });
+              $('#released_ongteqPicker').on("dp.change", function (e) {
+                  $('#released_onlteqPicker').data("DateTimePicker").minDate(e.date);
+              });
+              $('#released_onlteqPicker').on("dp.change", function (e) {
+                  $('#released_ongteqPicker').data("DateTimePicker").maxDate(e.date);
+              });
+          });
+      </script>
+
+<div class="form-group">
+      <%= f.label :showtime_gteq, "Showtime greater than or equal to" %>
+      <div class='input-group date' id='showtimegteqPicker'>
+        <%= f.text_field :showtime_gteq, :class => "form-control", :placeholder => "Showtime greater than or equal to" %>
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-time"></span>
+        </span>
+        <script type="text/javascript">
+          $(function () {
+              $('#showtimegteqPicker').datetimepicker({
+                format: 'LT'
+              });
+          });
+        </script>
+      </div>
+    </div>
+
+<div class="form-group">
+      <%= f.label :showtime_lteq, "Showtime less than or equal to" %>
+      <div class='input-group date' id='showtimelteqPicker'>
+        <%= f.text_field :showtime_lteq, :class => "form-control", :placeholder => "Showtime less than or equal to" %>
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-time"></span>
+        </span>
+        <script type="text/javascript">
+          $(function () {
+              $('#showtimelteqPicker').datetimepicker({
+                format: 'LT'
+              });
+          });
+        </script>
+      </div>
+    </div>
+
+<div class="form-group">
     <%= f.label :description_cont, "Description contains" %>
     <%= f.text_field :description_cont, :class => "form-control", :placeholder => "Description contains" %>
   </div>
@@ -43,7 +128,7 @@
     </div>
       <div class="form-group">
           <div class="row">
-            <div class='col-md-6'>
+            <div class='col-md-6 mb-1'>
               <div class='input-group date' id='created_atgteqPicker'>
                   <%= f.text_field :created_at_gteq, :class => "form-control", :placeholder => "Created at greater than or equal to" %>
                   <span class="input-group-addon">
@@ -65,11 +150,11 @@
       <script type="text/javascript">
           $(function () {
               $('#created_atgteqPicker').datetimepicker({
-                  format: 'YYYY-MM-DD hh:mm:ss'
+                  format: 'YYYY-MM-DD hh:mm:SS'
               });
               $('#created_atlteqPicker').datetimepicker({
                   useCurrent: false,
-                  format: 'YYYY-MM-DD hh:mm:ss'
+                  format: 'YYYY-MM-DD hh:mm:SS'
               });
               $('#created_atgteqPicker').on("dp.change", function (e) {
                   $('#created_atlteqPicker').data("DateTimePicker").minDate(e.date);
@@ -85,9 +170,14 @@
       <%= f.text_field :director_name_cont, :class => "form-control", :placeholder => "Director name contains" %>
     </div>
 
-      <%= f.submit :class => "btn btn-primary btn-block" %>
+<div class="form-group">
+      <%= f.label :cast_name_cont, "Actor name contains" %>
+      <%= f.text_field :cast_name_cont, :class => "form-control", :placeholder => "Actor name contains" %>
+    </div>
 
-      <a href="/movies" class="btn btn-default btn-block">Clear filters</a>
+      <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
+
+      <a href="/movies" class="btn btn-default btn-block mb-1">Clear filters</a>
     <% end %>
     <a class="btn btn-default btn-block mb-1" data-toggle="collapse" href="#movies_filters">
       Show Filters
@@ -104,6 +194,9 @@
         <th>Rating</th>
         <th>Description</th>
         <th>Director</th>
+        <th>Showtime</th>
+        <th>Released on</th>
+        <th>Best picture</th>
         <th>Actions</th>
       </tr>
 
@@ -120,6 +213,9 @@
             </a>
           <% end %>
         </td>
+        <td><%= movie.showtime %></td>
+        <td><%= movie.released_on %></td>
+        <td><%= movie.best_picture %></td>
         <td>
           <a href="/movies/<%= movie.id %>" class="btn btn-primary">Show</a>
           <a href="/movies/<%= movie.id %>/edit" class="btn btn-warning">Edit</a>
