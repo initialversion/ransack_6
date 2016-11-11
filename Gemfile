@@ -59,7 +59,7 @@ gem 'underscore-rails'
 gem "rollbar"
 gem "kaminari"
 gem "bootstrap4-kaminari-views"
-gem 'seed_dump', :git => 'https://github.com/murugan-r/seed_dump.git'
+gem 'seed_dump', :git => 'https://github.com/firstdraft/seed_dump.git'
 gem 'activerecord-import'
 gem "ransack"
 gem 'momentjs-rails', '>= 2.9.0'
