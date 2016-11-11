@@ -16,9 +16,17 @@
 <div class="form-group">
     <%= f.label :best_picture_eq, "Best picture" %>
     <div>
-      <%= f.radio_button :best_picture_eq, "1", checked: ((params[:q] && params[:q][:best_picture_eq]) == "1" ? "checked" : "") %> Yes
-      <%= f.radio_button :best_picture_eq, "0", checked: ((params[:q] && params[:q][:best_picture_eq]) == "0" ? "checked" : "")%> No
-      <%= f.radio_button :best_picture_eq, ""%> Either
+      <label class="radio-inline">
+        <%= f.radio_button :best_picture_eq, "1", checked: ((params[:q] && params[:q][:best_picture_eq]) == "1" ? "checked" : "") %> Yes
+      </label>
+
+      <label class="radio-inline">
+        <%= f.radio_button :best_picture_eq, "0", checked: ((params[:q] && params[:q][:best_picture_eq]) == "0" ? "checked" : "")%> No
+      </label>
+
+      <label class="radio-inline">
+        <%= f.radio_button :best_picture_eq, ""%> Either
+      </label>
     </div>
   </div>
 
