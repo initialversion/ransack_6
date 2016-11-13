@@ -16,9 +16,15 @@
 <div class="form-group">
     <%= f.label :best_picture_eq, "Best picture" %>
     <div>
-      <%= f.radio_button :best_picture_eq, "1", checked: ((params[:q] && params[:q][:best_picture_eq]) == "1" ? "checked" : "") %> Yes
-      <%= f.radio_button :best_picture_eq, "0", checked: ((params[:q] && params[:q][:best_picture_eq]) == "0" ? "checked" : "")%> No
-      <%= f.radio_button :best_picture_eq, ""%> Either
+      <label class="radio-inline">
+        <%= f.radio_button :best_picture_eq, "1", checked: ((params[:q] && params[:q][:best_picture_eq]) == "1" ? "checked" : "") %> Yes
+      </label>
+      <label class="radio-inline">
+        <%= f.radio_button :best_picture_eq, "0", checked: ((params[:q] && params[:q][:best_picture_eq]) == "0" ? "checked" : "")%> No
+      </label>
+      <label class="radio-inline">
+        <%= f.radio_button :best_picture_eq, ""%> Either
+      </label>
     </div>
   </div>
 
@@ -65,38 +71,42 @@
       </script>
 
 <div class="form-group">
-      <%= f.label :showtime_gteq, "Showtime greater than or equal to" %>
-      <div class='input-group date' id='showtimegteqPicker'>
-        <%= f.text_field :showtime_gteq, :class => "form-control", :placeholder => "Showtime greater than or equal to" %>
-        <span class="input-group-addon">
-            <span class="glyphicon glyphicon-time"></span>
-        </span>
-        <script type="text/javascript">
-          $(function () {
-              $('#showtimegteqPicker').datetimepicker({
-                format: 'LT'
-              });
-          });
-        </script>
+        <%= f.label :showtime, "Showtime" %>
       </div>
-    </div>
-
-<div class="form-group">
-      <%= f.label :showtime_lteq, "Showtime less than or equal to" %>
-      <div class='input-group date' id='showtimelteqPicker'>
-        <%= f.text_field :showtime_lteq, :class => "form-control", :placeholder => "Showtime less than or equal to" %>
-        <span class="input-group-addon">
-            <span class="glyphicon glyphicon-time"></span>
-        </span>
-        <script type="text/javascript">
-          $(function () {
-              $('#showtimelteqPicker').datetimepicker({
-                format: 'LT'
-              });
-          });
-        </script>
+      <div class="form-group">
+        <div class="row">
+          <div class='col-md-6 mb-1'>
+            <div class='input-group date' id='showtimegteqPicker'>
+              <%= f.text_field :showtime_gteq, :class => "form-control", :placeholder => "Showtime greater than or equal to" %>
+              <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-time"></span>
+              </span>
+              <script type="text/javascript">
+                $(function () {
+                    $('#showtimegteqPicker').datetimepicker({
+                      format: 'LT'
+                    });
+                });
+              </script>
+            </div>
+          </div>
+          <div class='col-md-6'>
+            <div class='input-group date' id='showtimelteqPicker'>
+              <%= f.text_field :showtime_lteq, :class => "form-control", :placeholder => "Showtime less than or equal to" %>
+              <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-time"></span>
+              </span>
+              <script type="text/javascript">
+                $(function () {
+                    $('#showtimelteqPicker').datetimepicker({
+                      format: 'LT'
+                    });
+                });
+              </script>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
 
 <div class="form-group">
     <%= f.label :description_cont, "Description contains" %>
@@ -104,24 +114,32 @@
   </div>
 
 <div class="form-group">
-    <%= f.label :rating_gteq, "Rating greater than or equal to" %>
-    <%= f.text_field :rating_gteq, :class => "form-control", :placeholder => "Rating greater than or equal to" %>
+  <%= f.label :rating, "Rating" %>
+</div>
+<div class="form-group">
+  <div class="row">
+    <div class='col-md-6 mb-1'>
+      <%= f.text_field :rating_gteq, :class => "form-control", :placeholder => "Rating greater than or equal to" %>
+    </div>
+    <div class='col-md-6'>
+      <%= f.text_field :rating_lteq, :class => "form-control", :placeholder => "Rating less than or equal to" %>
+    </div>
   </div>
+</div>
 
 <div class="form-group">
-    <%= f.label :rating_lteq, "Rating less than or equal to" %>
-    <%= f.text_field :rating_lteq, :class => "form-control", :placeholder => "Rating less than or equal to" %>
-  </div>
-
+  <%= f.label :duration, "Duration" %>
+</div>
 <div class="form-group">
-    <%= f.label :duration_gteq, "Duration greater than or equal to" %>
-    <%= f.text_field :duration_gteq, :class => "form-control", :placeholder => "Duration greater than or equal to" %>
+  <div class="row">
+    <div class='col-md-6 mb-1'>
+      <%= f.text_field :duration_gteq, :class => "form-control", :placeholder => "Duration greater than or equal to" %>
+    </div>
+    <div class='col-md-6'>
+      <%= f.text_field :duration_lteq, :class => "form-control", :placeholder => "Duration less than or equal to" %>
+    </div>
   </div>
-
-<div class="form-group">
-    <%= f.label :duration_lteq, "Duration less than or equal to" %>
-    <%= f.text_field :duration_lteq, :class => "form-control", :placeholder => "Duration less than or equal to" %>
-  </div>
+</div>
 
 <div class="form-group">
       <%= f.label :created_at, "Created at" %>
