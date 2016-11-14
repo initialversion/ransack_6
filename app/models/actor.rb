@@ -1,4 +1,4 @@
-class Actor < ApplicationRecord
+class Actor < ActiveRecord::Base
   # Direct associations
 
   has_many   :castings,

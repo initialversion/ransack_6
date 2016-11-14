@@ -27,7 +27,7 @@ class CastingsController < ApplicationController
     save_status = @casting.save
 
     if save_status == true
-      redirect_to(:back, :notice => "Casting created successfully.")
+      redirect_to("/castings/#{@casting.id}", :notice => "Casting created successfully.")
     else
       render("castings/new.html.erb")
     end
@@ -48,7 +48,7 @@ class CastingsController < ApplicationController
     save_status = @casting.save
 
     if save_status == true
-      redirect_to(:back, :notice => "Casting updated successfully.")
+      redirect_to("/castings/#{@casting.id}", :notice => "Casting updated successfully.")
     else
       render("castings/edit.html.erb")
     end
