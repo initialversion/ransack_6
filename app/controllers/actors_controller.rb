@@ -28,7 +28,7 @@ class ActorsController < ApplicationController
     save_status = @actor.save
 
     if save_status == true
-      redirect_to(:back, :notice => "Actor created successfully.")
+      redirect_to("/actors/#{@actor.id}", :notice => "Actor created successfully.")
     else
       render("actors/new.html.erb")
     end
@@ -49,7 +49,7 @@ class ActorsController < ApplicationController
     save_status = @actor.save
 
     if save_status == true
-      redirect_to(:back, :notice => "Actor updated successfully.")
+      redirect_to("/actors/#{@actor.id}", :notice => "Actor updated successfully.")
     else
       render("actors/edit.html.erb")
     end
